@@ -37,7 +37,7 @@ public partial class Character : Node2D
     public override void _Process(double delta)
     {
         UpdatePosition(delta);
-    
+
         var settings = GetNodeOrNull<Settings>("Settings");
         if (settings != null && settings.IsDebug)
         {

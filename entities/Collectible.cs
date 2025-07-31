@@ -1,6 +1,6 @@
 using Godot;
 
-public abstract partial class Collectible : CharacterBody2D
+public abstract partial class Collectible : AnimatableBody2D
 {
     protected bool Collected = false;
     protected int ID = 0;
