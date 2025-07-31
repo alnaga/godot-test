@@ -7,18 +7,9 @@ public partial class Settings : Node
 {
     public bool IsDebug = false;
 
-    public override void _Process(double delta)
-    {
-        if (!IsDebug)
-        {
-            return;
-        }
-
-        GD.Print("Debug: ", IsDebug);
-    }
-
     public void ToggleDebug()
     {
         IsDebug = !IsDebug;
+        GD.Print("Debug: ", IsDebug);
     }
 }

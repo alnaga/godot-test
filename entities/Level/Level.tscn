@@ -1,7 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://tsxactf81qma"]
+[gd_scene load_steps=3 format=3 uid="uid://tsxactf81qma"]
 
 [ext_resource type="PackedScene" uid="uid://bgpvwxyot86rh" path="res://entities/Character/Character.tscn" id="1_wifxv"]
+[ext_resource type="Script" uid="uid://cbldse1opeetw" path="res://entities/Player.cs" id="2_1tl7f"]
 
 [node name="Level" type="Node2D"]
 
-[node name="Character" parent="." instance=ExtResource("1_wifxv")]
+[node name="PlayerCharacter" parent="." instance=ExtResource("1_wifxv")]
+script = ExtResource("2_1tl7f")

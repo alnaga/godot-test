@@ -1,4 +1,5 @@
 using Godot;
+using System;
 
 // TODO: Make Hadrian Pac-Man
 /*
@@ -20,35 +21,28 @@ using Godot;
  * - the algorithm should be able to figure out the possible directions it can choose at any moment, the path to the player should be calculated based on the possible directions
  * - 
  */
+
+public enum Direction
+{
+    Left,
+    Right,
+    Up,
+    Down
+}
+
 public partial class Character : Node2D
 {
     private Vector2 Velocity = new(0, 0);
-    private bool IsDebug = true;
 
     public override void _Process(double delta)
     {
-        HandleInput();
         UpdatePosition(delta);
-        PrintDebug();
-    }
-
-    private void HandleInput()
-    {
-        if (Input.IsActionPressed("move_right"))
+    
+        var settings = GetNodeOrNull<Settings>("Settings");
+        if (settings != null && settings.IsDebug)
         {
-            UpdateVelocity(new Vector2(1, 0));
-        }
-        if (Input.IsActionPressed("move_left"))
-        {
-            UpdateVelocity(new Vector2(-1, 0));
-        }
-        if (Input.IsActionPressed("move_up"))
-        {
-            UpdateVelocity(new Vector2(0, -1));
-        }
-        if (Input.IsActionPressed("move_down"))
-        {
-            UpdateVelocity(new Vector2(0, 1));
+            GD.Print("Position: ", Position);
+            GD.Print("Velocity: ", Velocity);
         }
     }
 
@@ -64,26 +58,22 @@ public partial class Character : Node2D
         }
     }
 
-    private void UpdatePosition(double delta)
+    public void Move(Direction direction)
+    {
+        Velocity = GetDirectionVector(direction);
+    }
+
+    private static Vector2 GetDirectionVector(Direction direction) => direction switch
+    {
+        Direction.Left => new(-1, 0),
+        Direction.Right => new(1, 0),
+        Direction.Up => new(0, -1),
+        Direction.Down => new(0, 1),
+        _ => throw new ArgumentException($"Invalid direction: {direction}")
+    };
+
+    protected virtual void UpdatePosition(double delta)
     {
         Position += Velocity * (float)delta * 100;
-    }
-
-    private void UpdateVelocity(Vector2 direction)
-    {
-        Velocity += direction;
-        Velocity = Velocity.Normalized() * 1;
-    }
-
-    private void PrintDebug()
-    {
-        if (!IsDebug)
-        {
-            return;
-        }
-
-        // GD.Print("Position: ", Position);
-        // GD.Print("Velocity: ", Velocity);
-        // GD.Print("IsDebug: ", IsDebug);
     }
 }
