@@ -30,19 +30,46 @@ public enum Direction
     Down
 }
 
-public partial class Character : Node2D
+public partial class Character : CharacterBody2D
 {
-    private Vector2 Velocity = new(0, 0);
+    // CharacterBody2D already has a Velocity property!
+    protected float Speed = 150;
+
+    public override void _Ready()
+    {
+        base._Ready();
+        
+        // CharacterBody2D collision detection is automatic!
+        // No setup needed - CollisionPolygon2D will work automatically
+    }
 
     public override void _Process(double delta)
     {
-        UpdatePosition(delta);
-
+        // Movement now handled in _PhysicsProcess
+        
         var settings = GetNodeOrNull<Settings>("Settings");
         if (settings != null && settings.IsDebug)
         {
             GD.Print("Position: ", Position);
             GD.Print("Velocity: ", Velocity);
+        }
+    }
+
+    public override void _PhysicsProcess(double delta)
+    {
+        base._PhysicsProcess(delta);
+
+        // Now we can use CharacterBody2D's built-in collision detection!
+        Vector2 motion = Velocity * (float)delta * Speed;
+        var collision = MoveAndCollide(motion);
+        
+        if (collision != null)
+        {
+            var collider = collision.GetCollider();
+            OnCollision(collider as Node2D);
+            
+            // Handle the collision response
+            HandleCollision(collision);
         }
     }
 
@@ -72,8 +99,37 @@ public partial class Character : Node2D
         _ => throw new ArgumentException($"Invalid direction: {direction}")
     };
 
-    protected virtual void UpdatePosition(double delta)
+    protected virtual void HandleCollision(KinematicCollision2D collision)
     {
-        Position += Velocity * (float)delta * 100;
+        // Default behavior for CharacterBody2D collision
+        var collider = collision.GetCollider();
+        GD.Print("Collided with: ", collider.GetType().Name, collider.GetInstanceId());
+        
+        // Different collision responses you can choose from:
+        
+        // Option 1: Stop movement
+        Velocity = Vector2.Zero;
+        
+        // Option 2: Bounce off (uncomment to use)
+        // Velocity = Velocity.Bounce(collision.GetNormal());
+        
+        // Option 3: Slide along surface (uncomment to use)
+        // Velocity = Velocity.Slide(collision.GetNormal());
+    }
+
+    // CharacterBody2D automatically handles CollisionPolygon2D collision detection!
+    // No additional setup methods needed
+
+    protected virtual void OnPickup(Collectible collectible)
+    {
+        GD.Print("Picked up: ", collectible.GetInstanceId());
+    }
+
+    protected virtual void OnCollision(Node2D other)
+    {
+        if (other is Collectible collectible)
+        {
+            OnPickup(collectible);
+        }
     }
 }

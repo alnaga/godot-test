@@ -5,15 +5,14 @@
 [sub_resource type="CanvasTexture" id="CanvasTexture_nt58w"]
 specular_color = Color(1, 0, 0, 1)
 
-[node name="Character" type="Node2D"]
+[node name="Character" type="CharacterBody2D"]
 script = ExtResource("1_nt58w")
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-
-[node name="Body" type="Polygon2D" parent="CharacterBody2D"]
+[node name="Body" type="Polygon2D" parent="."]
 color = Color(1, 0, 0, 1)
 texture = SubResource("CanvasTexture_nt58w")
 polygon = PackedVector2Array(-25, -25, 25, -25, 25, 25, -25, 25)
+uv = PackedVector2Array(-25, -25, 25, -25, 25, 25, -25, 25)
 
-[node name="BodyCollision" type="CollisionPolygon2D" parent="CharacterBody2D"]
+[node name="BodyCollider" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-25, -25, 25, -25, 25, 25, -25, 25)

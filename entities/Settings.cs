@@ -10,6 +10,6 @@ public partial class Settings : Node
     public void ToggleDebug()
     {
         IsDebug = !IsDebug;
-        GD.Print("Debug: ", IsDebug);
+        GD.Print("Debug: ", IsDebug ? "enabled" : "disabled");
     }
 }

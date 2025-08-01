@@ -3,7 +3,7 @@ using Godot;
 public abstract partial class Collectible : AnimatableBody2D
 {
     protected bool Collected = false;
-    protected int ID = 0;
+    protected int Value = 1;
 
     public override void _Process(double delta)
     {
@@ -12,7 +12,7 @@ public abstract partial class Collectible : AnimatableBody2D
         var settings = GetNodeOrNull<Settings>("Settings");
         if (settings != null && settings.IsDebug)
         {
-            GD.Print("Collectible with ID: ", ID, " collected: ", Collected);
+            GD.Print("Collectible with ID: ", GetInstanceId(), " collected: ", Collected);
         }
     }
 
