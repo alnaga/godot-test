@@ -39,6 +39,8 @@ public partial class Character : CharacterBody2D
     {
         base._Ready();
 
+        GD.Print("Character node found: ", this != null);
+
         // CharacterBody2D collision detection is automatic!
         // No setup needed - CollisionPolygon2D will work automatically
     }
@@ -65,10 +67,6 @@ public partial class Character : CharacterBody2D
 
         if (collision != null)
         {
-            var collider = collision.GetCollider();
-            OnCollision(collider as Node2D);
-
-            // Handle the collision response
             HandleCollision(collision);
         }
     }
@@ -122,19 +120,6 @@ public partial class Character : CharacterBody2D
         {
             // For other collision types (walls, etc.), stop movement
             Velocity = Vector2.Zero;
-        }
-    }
-
-    protected virtual void OnPickup(Collectible collectible)
-    {
-        GD.Print("Picked up: ", collectible.GetInstanceId());
-    }
-
-    protected virtual void OnCollision(Node2D other)
-    {
-        if (other is Collectible collectible)
-        {
-            OnPickup(collectible);
         }
     }
 }

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://tsxactf81qma"]
+[gd_scene load_steps=5 format=3 uid="uid://tsxactf81qma"]
 
 [ext_resource type="PackedScene" uid="uid://bgpvwxyot86rh" path="res://entities/Character/Character.tscn" id="1_wifxv"]
 [ext_resource type="Script" uid="uid://cbldse1opeetw" path="res://entities/Player/Player.cs" id="2_1tl7f"]
+[ext_resource type="PackedScene" uid="uid://b1oh5bp3hyayk" path="res://entities/Collectible/Collectible.tscn" id="3_upei0"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_1tl7f"]
 specular_color = Color(0, 1, 0, 1)
@@ -26,3 +27,9 @@ polygon = PackedVector2Array(-25, -25, 25, -25, 25, 25, -25, 25)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D"]
 polygon = PackedVector2Array(-25, -25, 25, -25, 25, 25, -25, 25)
+
+[node name="Collectible" parent="." instance=ExtResource("3_upei0")]
+position = Vector2(1253, 314)
+
+[node name="Collectible2" parent="." instance=ExtResource("3_upei0")]
+position = Vector2(496, 533)
