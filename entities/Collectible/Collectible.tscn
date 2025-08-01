@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://b1oh5bp3hyayk"]
+
+[node name="Collectible" type="Node2D"]

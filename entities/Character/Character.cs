@@ -38,7 +38,7 @@ public partial class Character : CharacterBody2D
     public override void _Ready()
     {
         base._Ready();
-        
+
         // CharacterBody2D collision detection is automatic!
         // No setup needed - CollisionPolygon2D will work automatically
     }
@@ -46,7 +46,7 @@ public partial class Character : CharacterBody2D
     public override void _Process(double delta)
     {
         // Movement now handled in _PhysicsProcess
-        
+
         var settings = GetNodeOrNull<Settings>("Settings");
         if (settings != null && settings.IsDebug)
         {
@@ -62,12 +62,12 @@ public partial class Character : CharacterBody2D
         // Now we can use CharacterBody2D's built-in collision detection!
         Vector2 motion = Velocity * (float)delta * Speed;
         var collision = MoveAndCollide(motion);
-        
+
         if (collision != null)
         {
             var collider = collision.GetCollider();
             OnCollision(collider as Node2D);
-            
+
             // Handle the collision response
             HandleCollision(collision);
         }
@@ -104,21 +104,26 @@ public partial class Character : CharacterBody2D
         // Default behavior for CharacterBody2D collision
         var collider = collision.GetCollider();
         GD.Print("Collided with: ", collider.GetType().Name, collider.GetInstanceId());
-        
-        // Different collision responses you can choose from:
-        
-        // Option 1: Stop movement
-        Velocity = Vector2.Zero;
-        
-        // Option 2: Bounce off (uncomment to use)
-        // Velocity = Velocity.Bounce(collision.GetNormal());
-        
-        // Option 3: Slide along surface (uncomment to use)
-        // Velocity = Velocity.Slide(collision.GetNormal());
-    }
 
-    // CharacterBody2D automatically handles CollisionPolygon2D collision detection!
-    // No additional setup methods needed
+        // Check if we collided with a RigidBody2D and push it
+        if (collider is RigidBody2D rigidBody)
+        {
+            // Calculate push force based on our velocity and collision normal
+            Vector2 pushDirection = -collision.GetNormal(); // Direction to push the other body
+            float pushForce = Speed * 1; // Adjust this value to control push strength
+
+            // Apply impulse to the RigidBody2D
+            rigidBody.ApplyImpulse(pushDirection * pushForce, collision.GetPosition() - rigidBody.GlobalPosition);
+
+            // Optionally reduce our velocity or bounce back
+            Velocity = Velocity.Bounce(collision.GetNormal()) * 0.5f; // Bounce with some energy loss
+        }
+        else
+        {
+            // For other collision types (walls, etc.), stop movement
+            Velocity = Vector2.Zero;
+        }
+    }
 
     protected virtual void OnPickup(Collectible collectible)
     {

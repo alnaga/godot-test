@@ -9,13 +9,14 @@ specular_color = Color(0, 1, 0, 1)
 [node name="Level" type="Node2D"]
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_wifxv")]
+position = Vector2(445, 296)
 script = ExtResource("2_1tl7f")
 
 [node name="Character" parent="." instance=ExtResource("1_wifxv")]
-position = Vector2(155, 83)
+position = Vector2(600, 379)
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
-position = Vector2(139, -21)
+position = Vector2(584, 275)
 gravity_scale = 0.0
 
 [node name="Polygon2D" type="Polygon2D" parent="RigidBody2D"]
