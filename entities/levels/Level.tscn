@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://tsxactf81qma"]
 
-[ext_resource type="PackedScene" uid="uid://bgpvwxyot86rh" path="res://Entities/Character.tscn" id="1_36j4u"]
-[ext_resource type="Script" uid="uid://cbldse1opeetw" path="res://Scripts/Player.cs" id="2_je25c"]
-[ext_resource type="PackedScene" uid="uid://b1oh5bp3hyayk" path="res://Entities/Collectible.tscn" id="3_2xnns"]
-[ext_resource type="PackedScene" uid="uid://c3qtxwu85ss3u" path="res://Entities/PhysicsWall.tscn" id="4_kr6jt"]
-[ext_resource type="PackedScene" uid="uid://rs6pj0py141u" path="res://Entities/Wall.tscn" id="5_4kknq"]
+[ext_resource type="PackedScene" uid="uid://bgpvwxyot86rh" path="res://entities/actors/character/Character.tscn" id="1_36j4u"]
+[ext_resource type="Script" uid="uid://cbldse1opeetw" path="res://entities/actors/player/Player.cs" id="2_je25c"]
+[ext_resource type="PackedScene" uid="uid://b1oh5bp3hyayk" path="res://entities/objects/Collectible.tscn" id="3_2xnns"]
+[ext_resource type="PackedScene" uid="uid://c3qtxwu85ss3u" path="res://entities/objects/PhysicsWall.tscn" id="4_kr6jt"]
+[ext_resource type="PackedScene" uid="uid://rs6pj0py141u" path="res://entities/objects/Wall.tscn" id="5_4kknq"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_1tl7f"]
 specular_color = Color(0, 1, 0, 1)
