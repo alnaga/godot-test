@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c3qtxwu85ss3u"]
 
-[ext_resource type="Script" uid="uid://bokgmyttqqp8t" path="res://entities/Wall/PhysicsWall.cs" id="1_physics_wall"]
+[ext_resource type="Script" uid="uid://bokgmyttqqp8t" path="res://Scripts/PhysicsWall.cs" id="1_physics_wall"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
 size = Vector2(50, 50)

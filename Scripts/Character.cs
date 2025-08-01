@@ -11,14 +11,6 @@ using System;
  * - 
  */
 
-public enum Direction
-{
-    Left,
-    Right,
-    Up,
-    Down
-}
-
 public partial class Character : CharacterBody2D
 {
     // CharacterBody2D already has a Velocity property!

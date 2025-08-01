@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://tsxactf81qma"]
+
+[ext_resource type="PackedScene" uid="uid://bgpvwxyot86rh" path="res://Entities/Character.tscn" id="1_36j4u"]
+[ext_resource type="Script" uid="uid://cbldse1opeetw" path="res://Scripts/Player.cs" id="2_je25c"]
+[ext_resource type="PackedScene" uid="uid://b1oh5bp3hyayk" path="res://Entities/Collectible.tscn" id="3_2xnns"]
+[ext_resource type="PackedScene" uid="uid://c3qtxwu85ss3u" path="res://Entities/PhysicsWall.tscn" id="4_kr6jt"]
+[ext_resource type="PackedScene" uid="uid://rs6pj0py141u" path="res://Entities/Wall.tscn" id="5_4kknq"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_1tl7f"]
+specular_color = Color(0, 1, 0, 1)
+
+[node name="Level" type="Node2D"]
+
+[node name="PlayerCharacter" parent="." instance=ExtResource("1_36j4u")]
+position = Vector2(445, 296)
+script = ExtResource("2_je25c")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+position = Vector2(584, 275)
+gravity_scale = 0.5
+
+[node name="Polygon2D" type="Polygon2D" parent="RigidBody2D"]
+color = Color(0, 1, 0, 1)
+texture = SubResource("CanvasTexture_1tl7f")
+polygon = PackedVector2Array(-25, -25, 25, -25, 25, 25, -25, 25)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D"]
+polygon = PackedVector2Array(-25, -25, 25, -25, 25, 25, -25, 25)
+
+[node name="Collectible" parent="." instance=ExtResource("3_2xnns")]
+position = Vector2(1253, 314)
+
+[node name="Collectible2" parent="." instance=ExtResource("3_2xnns")]
+position = Vector2(496, 533)
+
+[node name="PhysicsWall" parent="." instance=ExtResource("4_kr6jt")]
+position = Vector2(329, 414)
+Width = 150.0
+
+[node name="Wall" parent="." instance=ExtResource("5_4kknq")]
+position = Vector2(543, 567)
+scale = Vector2(17.08, 1)
