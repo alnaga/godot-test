@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://tsxactf81qma"]
+[gd_scene load_steps=7 format=3 uid="uid://tsxactf81qma"]
 
 [ext_resource type="PackedScene" uid="uid://bgpvwxyot86rh" path="res://entities/Character/Character.tscn" id="1_wifxv"]
 [ext_resource type="Script" uid="uid://cbldse1opeetw" path="res://entities/Player/Player.cs" id="2_1tl7f"]
 [ext_resource type="PackedScene" uid="uid://b1oh5bp3hyayk" path="res://entities/Collectible/Collectible.tscn" id="3_upei0"]
+[ext_resource type="PackedScene" uid="uid://rs6pj0py141u" path="res://entities/Wall/Wall.tscn" id="4_6713f"]
+[ext_resource type="PackedScene" uid="uid://c3qtxwu85ss3u" path="res://entities/Wall/PhysicsWall.tscn" id="4_uyxpo"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_1tl7f"]
 specular_color = Color(0, 1, 0, 1)
@@ -12,9 +14,6 @@ specular_color = Color(0, 1, 0, 1)
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_wifxv")]
 position = Vector2(445, 296)
 script = ExtResource("2_1tl7f")
-
-[node name="Character" parent="." instance=ExtResource("1_wifxv")]
-position = Vector2(600, 379)
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
 position = Vector2(584, 275)
@@ -33,3 +32,11 @@ position = Vector2(1253, 314)
 
 [node name="Collectible2" parent="." instance=ExtResource("3_upei0")]
 position = Vector2(496, 533)
+
+[node name="PhysicsWall" parent="." instance=ExtResource("4_uyxpo")]
+position = Vector2(329, 414)
+Width = 150.0
+
+[node name="Wall" parent="." instance=ExtResource("4_6713f")]
+position = Vector2(543, 567)
+scale = Vector2(17.08, 1)

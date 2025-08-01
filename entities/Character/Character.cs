@@ -3,17 +3,6 @@ using System;
 
 // TODO: Make Hadrian Pac-Man
 /*
- * Make Character entity, which:
- * - when turning in any direction, sets a constant speed
- * - use normal MoveLeft, MoveRight etc methods to control movement
- * - if moving into a wall, stop moving
- * - if moving over a pickup, add to global score and change the status of the pickup to collected
- * Make a Player entity, which:
- * - is an instance of Character
- * - calls the MoveLeft, MoveRight etc methods when the player presses the corresponding keys
- * - has a score
- * - has a lives
- * - has a level
  * Make an Enemy entity, which:
  * - is an instance of Character
  * - calculates a path to the player using some algorithm and chases them
