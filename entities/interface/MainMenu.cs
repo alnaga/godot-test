@@ -10,8 +10,8 @@ public partial class MainMenu : Control
 
     public override void _Input(InputEvent @event)
     {
-        // Example: Press Enter to start game
-        if (@event.IsActionPressed("start_game"))
+        // If click on the screen, start game
+        if (@event is InputEventMouseButton mouseEvent && mouseEvent.ButtonIndex == MouseButton.Left && mouseEvent.Pressed)
         {
             StartGame();
         }
@@ -19,12 +19,8 @@ public partial class MainMenu : Control
 
     private void StartGame()
     {
-        // Find the Main node and change game state
-        var main = GetTree().GetFirstNodeInGroup("main") as Main;
-        if (main != null)
-        {
-            main.SetGameState(GameState.Game);
-        }
+        // Use utility method to change game state
+        GameManager.SetGameState(this, GameState.Game);
     }
 
     private void OnStartButtonPressed()

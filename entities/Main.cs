@@ -1,13 +1,5 @@
 using Godot;
 
-public enum GameState
-{
-    MainMenu,
-    Game,
-    Pause,
-    GameOver
-}
-
 public partial class Main : Node
 {
     private GameState _gameState = GameState.MainMenu;
@@ -75,8 +67,8 @@ public partial class Main : Node
     }
 
     // Public method to change game state from other scripts
-    public void SetGameState(GameState newState)
-    {
-        _gameState = newState;
-    }
+    public void SetGameState(GameState newState) => _gameState = newState;
+
+    // Public method to get current game state
+    public GameState GetCurrentGameState() => _gameState;
 }
