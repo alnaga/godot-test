@@ -15,4 +15,6 @@ script = ExtResource("1_abc123")
 layout_mode = 0
 offset_right = 132.0
 offset_bottom = 40.0
+scale = Vector2(4.20236, 5.05101)
 text = "no siis tere"
+horizontal_alignment = 1
