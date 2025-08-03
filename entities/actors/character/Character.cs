@@ -13,7 +13,7 @@ using System;
 
 public partial class Character : CharacterBody2D
 {
-    protected float Speed = 150;
+    protected float Speed = 25;
 
     private Settings _settings;
 
@@ -51,41 +51,29 @@ public partial class Character : CharacterBody2D
         }
     }
 
-    public override void _Draw()
-    {
-        base._Draw();
-
-        var body = GetNodeOrNull<Polygon2D>("CharacterBody2D/Body");
-        if (body != null)
-        {
-            body.Position = Position;
-        }
-    }
-
     public void Move(Direction direction)
     {
-        Velocity = GetDirectionVector(direction);
+        Velocity += GetDirectionVector(direction);
+        Velocity = Velocity.Normalized() * Speed;
     }
 
-    private static Vector2 GetDirectionVector(Direction direction) => direction switch
+    private static Vector2 GetDirectionVector(Direction? direction) => direction switch
     {
         Direction.Left => new(-1, 0),
         Direction.Right => new(1, 0),
         Direction.Up => new(0, -1),
         Direction.Down => new(0, 1),
-        _ => throw new ArgumentException($"Invalid direction: {direction}")
+        _ => Vector2.Zero
     };
 
     protected virtual void HandleCollision(KinematicCollision2D collision)
     {
-        // Default behavior for CharacterBody2D collision
         var collider = collision.GetCollider();
         if (_settings != null && _settings.IsDebug)
         {
             GD.Print("Collided with: ", collider.GetType().Name, collider.GetInstanceId());
         }
 
-        // Check if we collided with a RigidBody2D and push it
         if (collider is RigidBody2D rigidBody)
         {
             // Calculate push force based on our velocity and collision normal

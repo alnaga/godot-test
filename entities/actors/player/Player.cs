@@ -38,5 +38,11 @@ public partial class Player : Character
         {
             Move(Direction.Down);
         }
+
+        // If none of the above are pressed, stop moving
+        if (!Input.IsActionPressed("move_right") && !Input.IsActionPressed("move_left") && !Input.IsActionPressed("move_up") && !Input.IsActionPressed("move_down"))
+        {
+            Velocity = Vector2.Zero;
+        }
     }
 }
