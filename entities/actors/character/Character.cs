@@ -13,25 +13,25 @@ using System;
 
 public partial class Character : CharacterBody2D
 {
-    // CharacterBody2D already has a Velocity property!
     protected float Speed = 150;
+
+    private Settings _settings;
 
     public override void _Ready()
     {
         base._Ready();
 
-        GD.Print("Character node found: ", this != null);
+        _settings = GameManager.GetSettings(this);
 
-        // CharacterBody2D collision detection is automatic!
-        // No setup needed - CollisionPolygon2D will work automatically
+        if (_settings != null && _settings.IsDebug)
+        {
+            GD.Print("Character node found: ", this != null);
+        }
     }
 
     public override void _Process(double delta)
     {
-        // Movement now handled in _PhysicsProcess
-
-        var settings = GetNodeOrNull<Settings>("Settings");
-        if (settings != null && settings.IsDebug)
+        if (_settings != null && _settings.IsDebug)
         {
             GD.Print("Position: ", Position);
             GD.Print("Velocity: ", Velocity);
@@ -42,7 +42,6 @@ public partial class Character : CharacterBody2D
     {
         base._PhysicsProcess(delta);
 
-        // Now we can use CharacterBody2D's built-in collision detection!
         Vector2 motion = Velocity * (float)delta * Speed;
         var collision = MoveAndCollide(motion);
 
@@ -56,7 +55,6 @@ public partial class Character : CharacterBody2D
     {
         base._Draw();
 
-        // Move the "Body" Polygon2D to match the Character's Position
         var body = GetNodeOrNull<Polygon2D>("CharacterBody2D/Body");
         if (body != null)
         {
@@ -82,7 +80,10 @@ public partial class Character : CharacterBody2D
     {
         // Default behavior for CharacterBody2D collision
         var collider = collision.GetCollider();
-        GD.Print("Collided with: ", collider.GetType().Name, collider.GetInstanceId());
+        if (_settings != null && _settings.IsDebug)
+        {
+            GD.Print("Collided with: ", collider.GetType().Name, collider.GetInstanceId());
+        }
 
         // Check if we collided with a RigidBody2D and push it
         if (collider is RigidBody2D rigidBody)

@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bgpvwxyot86rh"]
+[gd_scene load_steps=3 format=3 uid="uid://c1dfay0avh8bd"]
 
-[ext_resource type="Script" uid="uid://bxsult5g8trt1" path="res://entities/actors/character/Character.cs" id="1_nt58w"]
+[ext_resource type="Script" uid="uid://dnj7nie3yqujp" path="res://entities/actors/character/Character.cs" id="1_nt58w"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_nt58w"]
 specular_color = Color(1, 0, 0, 1)
@@ -9,6 +9,7 @@ specular_color = Color(1, 0, 0, 1)
 script = ExtResource("1_nt58w")
 
 [node name="Body" type="Polygon2D" parent="."]
+scale = Vector2(0.999166, 1)
 color = Color(1, 0, 0, 1)
 texture = SubResource("CanvasTexture_nt58w")
 polygon = PackedVector2Array(-25, -25, 25, -25, 25, 25, -25, 25)
