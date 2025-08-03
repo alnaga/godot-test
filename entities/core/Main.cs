@@ -2,7 +2,7 @@ using Godot;
 
 public partial class Main : Node
 {
-    private GameState _gameState = GameState.MainMenu;
+    private GameState _gameState = GameState.Game;
     private GameState _previousGameState;
     private Node _sceneContainer;
     private Node _currentScene;
@@ -19,7 +19,7 @@ public partial class Main : Node
         AddChild(_sceneContainer);
 
         // Load initial scene
-        ChangeGameState(GameState.MainMenu);
+        ChangeGameState(GameState.Game);
     }
 
     public override void _Process(double delta)

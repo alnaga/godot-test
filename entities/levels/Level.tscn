@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://tsxactf81qma"]
+[gd_scene load_steps=7 format=3 uid="uid://tsxactf81qma"]
 
+[ext_resource type="PackedScene" uid="uid://5s1btdso6ii2" path="res://entities/objects/Map.tscn" id="1_awo6f"]
 [ext_resource type="PackedScene" uid="uid://b1oh5bp3hyayk" path="res://entities/objects/Collectible.tscn" id="3_2xnns"]
 [ext_resource type="PackedScene" uid="uid://c3qtxwu85ss3u" path="res://entities/objects/PhysicsWall.tscn" id="4_kr6jt"]
 [ext_resource type="PackedScene" uid="uid://rs6pj0py141u" path="res://entities/objects/Wall.tscn" id="5_4kknq"]
@@ -9,6 +10,10 @@
 specular_color = Color(0, 1, 0, 1)
 
 [node name="Level" type="Node2D"]
+
+[node name="Map" parent="." instance=ExtResource("1_awo6f")]
+position = Vector2(986, 758)
+scale = Vector2(5, 5)
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
 position = Vector2(584, 275)
@@ -31,6 +36,7 @@ position = Vector2(496, 533)
 [node name="PhysicsWall" parent="." instance=ExtResource("4_kr6jt")]
 position = Vector2(329, 414)
 Width = 150.0
+Height = 30.0
 
 [node name="Wall" parent="." instance=ExtResource("5_4kknq")]
 position = Vector2(543, 567)
