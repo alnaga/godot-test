@@ -1,20 +1,46 @@
-[gd_scene load_steps=2 format=3 uid="uid://c81wuet8hf1k1"]
+[gd_scene load_steps=3 format=3 uid="uid://c81wuet8hf1k1"]
 
 [ext_resource type="Script" uid="uid://dmfeewx1hhwe8" path="res://entities/interface/MainMenu.cs" id="1_abc123"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_jrke5"]
+font_size = 64
+
 [node name="MainMenu" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -68.0
+offset_bottom = -68.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_abc123")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-layout_mode = 0
-offset_right = 132.0
-offset_bottom = 40.0
-scale = Vector2(4.20236, 5.05101)
-text = "no siis tere"
-horizontal_alignment = 1
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.5
+offset_top = -25.0
+offset_right = 25.5
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "no siis tere seal"
+label_settings = SubResource("LabelSettings_jrke5")
+
+[node name="PlayButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Play"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Quit"
