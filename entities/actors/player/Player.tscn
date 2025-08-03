@@ -5,7 +5,7 @@
 
 [node name="Player" type="Node2D"]
 
-[node name="Camera2D" type="Camera2D" parent="."]
-
 [node name="Character" parent="." instance=ExtResource("1_uphc4")]
 script = ExtResource("2_p6yci")
+
+[node name="Camera2D" type="Camera2D" parent="Character"]

@@ -13,9 +13,12 @@ using System;
 
 public partial class Character : CharacterBody2D
 {
-    protected float Speed = 25;
+    [Export] public float Speed = 500.0f;
+    [Export] public float Acceleration = 2500.0f;
+    [Export] public float Friction = 1200.0f;
 
     private Settings _settings;
+    protected Vector2 _inputDirection = Vector2.Zero;
 
     public override void _Ready()
     {
@@ -35,6 +38,7 @@ public partial class Character : CharacterBody2D
         {
             GD.Print("Position: ", Position);
             GD.Print("Velocity: ", Velocity);
+            GD.Print("Input Direction: ", _inputDirection);
         }
     }
 
@@ -42,19 +46,77 @@ public partial class Character : CharacterBody2D
     {
         base._PhysicsProcess(delta);
 
-        Vector2 motion = Velocity * (float)delta * Speed;
-        var collision = MoveAndCollide(motion);
+        HandleMovementInput();
+        ApplyMovement(delta);
+        MoveAndSlide();
+        HandleCollisions();
+    }
 
-        if (collision != null)
+    private void HandleMovementInput()
+    {
+        // Get input from action map (you'll need to set these up in Input Map)
+        _inputDirection = Vector2.Zero;
+
+        if (Input.IsActionPressed("move_left"))
+            _inputDirection.X -= 1;
+        if (Input.IsActionPressed("move_right"))
+            _inputDirection.X += 1;
+        if (Input.IsActionPressed("move_up"))
+            _inputDirection.Y -= 1;
+        if (Input.IsActionPressed("move_down"))
+            _inputDirection.Y += 1;
+
+        // Normalize diagonal movement so it's not faster
+        _inputDirection = _inputDirection.Normalized();
+    }
+
+    private void ApplyMovement(double delta)
+    {
+        if (_inputDirection != Vector2.Zero)
         {
-            HandleCollision(collision);
+            // Immediately set velocity to target direction and speed
+            Velocity = _inputDirection * Speed;
+        }
+        else
+        {
+            // Apply friction when no input
+            Velocity = Velocity.MoveToward(Vector2.Zero, Friction * (float)delta);
         }
     }
 
+    // Public method for AI or other scripts to control movement
     public void Move(Direction direction)
     {
-        Velocity += GetDirectionVector(direction);
-        Velocity = Velocity.Normalized() * Speed;
+        _inputDirection = GetDirectionVector(direction);
+    }
+
+    // Public method to set movement direction directly
+    public void SetMovementDirection(Vector2 direction)
+    {
+        _inputDirection = direction.Normalized();
+    }
+
+    // Convenience methods for movement control
+    public void StopMovement()
+    {
+        _inputDirection = Vector2.Zero;
+        Velocity = Vector2.Zero;
+    }
+
+    public bool IsMoving()
+    {
+        return Velocity.LengthSquared() > 1.0f; // Small threshold to account for floating point precision
+    }
+
+    public Vector2 GetMovementDirection()
+    {
+        return _inputDirection;
+    }
+
+    // Get the current movement speed (actual velocity magnitude)
+    public float GetCurrentSpeed()
+    {
+        return Velocity.Length();
     }
 
     private static Vector2 GetDirectionVector(Direction? direction) => direction switch
@@ -66,30 +128,54 @@ public partial class Character : CharacterBody2D
         _ => Vector2.Zero
     };
 
-    protected virtual void HandleCollision(KinematicCollision2D collision)
+    // Called after MoveAndSlide to handle any collisions that occurred
+    private void HandleCollisions()
     {
-        var collider = collision.GetCollider();
+        // MoveAndSlide automatically handles collision detection and sliding
+        // We can check for specific collision events here if needed
+        
+        for (int i = 0; i < GetSlideCollisionCount(); i++)
+        {
+            var collision = GetSlideCollision(i);
+            var collider = collision.GetCollider();
+            
+            if (_settings != null && _settings.IsDebug)
+            {
+                GD.Print("Collided with: ", collider.GetType().Name);
+            }
+
+            // Handle specific collision types
+            if (collider is RigidBody2D rigidBody)
+            {
+                PushRigidBody(rigidBody, collision);
+            }
+            else if (collider is Area2D area)
+            {
+                HandleAreaCollision(area);
+            }
+        }
+    }
+
+    private void PushRigidBody(RigidBody2D rigidBody, KinematicCollision2D collision)
+    {
+        // Calculate push force based on our velocity and collision normal
+        Vector2 pushDirection = -collision.GetNormal();
+        float pushForce = Velocity.Length() * 0.1f; // Adjust multiplier for push strength
+
+        // Apply impulse to the RigidBody2D
+        Vector2 impulse = pushDirection * pushForce;
+        Vector2 contactPoint = collision.GetPosition() - rigidBody.GlobalPosition;
+        
+        rigidBody.ApplyImpulse(impulse, contactPoint);
+    }
+
+    protected virtual void HandleAreaCollision(Area2D area)
+    {
+        // Override in derived classes to handle specific area interactions
+        // For example: collectibles, damage zones, triggers, etc.
         if (_settings != null && _settings.IsDebug)
         {
-            GD.Print("Collided with: ", collider.GetType().Name, collider.GetInstanceId());
-        }
-
-        if (collider is RigidBody2D rigidBody)
-        {
-            // Calculate push force based on our velocity and collision normal
-            Vector2 pushDirection = -collision.GetNormal(); // Direction to push the other body
-            float pushForce = Speed * 1; // Adjust this value to control push strength
-
-            // Apply impulse to the RigidBody2D
-            rigidBody.ApplyImpulse(pushDirection * pushForce, collision.GetPosition() - rigidBody.GlobalPosition);
-
-            // Optionally reduce our velocity or bounce back
-            Velocity = Velocity.Bounce(collision.GetNormal()) * 0.5f; // Bounce with some energy loss
-        }
-        else
-        {
-            // For other collision types (walls, etc.), stop movement
-            Velocity = Vector2.Zero;
+            GD.Print("Entered area: ", area.Name);
         }
     }
 }
