@@ -3,6 +3,7 @@ using Godot;
 /// <summary>
 /// Script for a settings node, which should exist on the global level in the scene tree. 
 /// </summary>
+// TODO: Look into autoloads (https://docs.godotengine.org/en/stable/tutorials/scripting/singletons_autoload.html) instead here, especially the thing with Instances
 [GlobalClass]
 public partial class Settings : Node
 {
