@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://tsxactf81qma"]
 
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_4eqhn"]
-[ext_resource type="PackedScene" uid="uid://bq55x522abt7n" path="res://entities/configuration/Settings.tscn" id="1_7e57l"]
+[ext_resource type="Script" uid="uid://bll4es4ccwiky" path="res://entities/configuration/Settings.cs" id="1_7e57l"]
 [ext_resource type="PackedScene" uid="uid://5s1btdso6ii2" path="res://entities/objects/Map.tscn" id="1_awo6f"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="2_7e57l"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="3_julna"]
@@ -16,7 +16,9 @@ ease = 2
 
 [node name="Level" type="Node2D"]
 
-[node name="Settings" parent="." instance=ExtResource("1_7e57l")]
+[node name="Settings" type="Node" parent="."]
+script = ExtResource("1_7e57l")
+metadata/_custom_type_script = "uid://bll4es4ccwiky"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 physics_interpolation_mode = 1

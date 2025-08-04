@@ -3,8 +3,10 @@ using Godot;
 /// <summary>
 /// Script for a settings node, which should exist on the global level in the scene tree. 
 /// </summary>
+[GlobalClass]
 public partial class Settings : Node
 {
+    [Export]
     public bool IsDebug = false;
 
     public override void _Ready()
