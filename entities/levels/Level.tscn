@@ -1,38 +1,51 @@
-[gd_scene load_steps=6 format=3 uid="uid://tsxactf81qma"]
+[gd_scene load_steps=9 format=3 uid="uid://tsxactf81qma"]
 
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_4eqhn"]
+[ext_resource type="PackedScene" uid="uid://bq55x522abt7n" path="res://entities/configuration/Settings.tscn" id="1_7e57l"]
 [ext_resource type="PackedScene" uid="uid://5s1btdso6ii2" path="res://entities/objects/Map.tscn" id="1_awo6f"]
-[ext_resource type="PackedScene" uid="uid://c3qtxwu85ss3u" path="res://entities/objects/PhysicsWall.tscn" id="4_kr6jt"]
-[ext_resource type="PackedScene" uid="uid://rs6pj0py141u" path="res://entities/objects/Wall.tscn" id="5_4kknq"]
-[ext_resource type="PackedScene" uid="uid://d0wwae6j2dtxl" path="res://entities/actors/player/Player.tscn" id="6_4eqhn"]
+[ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="2_7e57l"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="3_julna"]
+[ext_resource type="PackedScene" uid="uid://c1dfay0avh8bd" path="res://entities/actors/character/Character.tscn" id="5_pfjf2"]
+[ext_resource type="Script" uid="uid://cbldse1opeetw" path="res://entities/actors/player/Player.cs" id="6_bebly"]
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_1tl7f"]
-specular_color = Color(0, 1, 0, 1)
+[sub_resource type="Resource" id="Resource_pfjf2"]
+script = ExtResource("3_julna")
+duration = 1.0
+transition = 0
+ease = 2
 
 [node name="Level" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("6_4eqhn")]
+[node name="Settings" parent="." instance=ExtResource("1_7e57l")]
 
-[node name="Map" parent="." instance=ExtResource("1_awo6f")]
+[node name="Camera2D" type="Camera2D" parent="."]
+physics_interpolation_mode = 1
+position = Vector2(1424, 0)
+zoom = Vector2(0.75, 0.75)
+process_callback = 0
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("1_4eqhn")
+metadata/_custom_type_script = "uid://bd046eokvcnu2"
+
+[node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
+top_level = true
+position = Vector2(1424, 0)
+script = ExtResource("2_7e57l")
+follow_mode = 2
+follow_target = NodePath("../Node/Player")
+zoom = Vector2(0.75, 0.75)
+tween_resource = SubResource("Resource_pfjf2")
+metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
+
+[node name="Node" type="Node" parent="."]
+
+[node name="Player" parent="Node" instance=ExtResource("5_pfjf2")]
+position = Vector2(1424, 0)
+script = ExtResource("6_bebly")
+
+[node name="Map" parent="Node" instance=ExtResource("1_awo6f")]
 position = Vector2(986, 758)
 scale = Vector2(5, 5)
-
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
-position = Vector2(584, 275)
-gravity_scale = 0.5
-
-[node name="Polygon2D" type="Polygon2D" parent="RigidBody2D"]
-color = Color(0, 1, 0, 1)
-texture = SubResource("CanvasTexture_1tl7f")
-polygon = PackedVector2Array(-25, -25, 25, -25, 25, 25, -25, 25)
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D"]
-polygon = PackedVector2Array(-25, -25, 25, -25, 25, 25, -25, 25)
-
-[node name="PhysicsWall" parent="." instance=ExtResource("4_kr6jt")]
-position = Vector2(329, 414)
-Width = 150.0
-Height = 30.0
-
-[node name="Wall" parent="." instance=ExtResource("5_4kknq")]
-position = Vector2(543, 567)
-scale = Vector2(17.08, 1.00709)

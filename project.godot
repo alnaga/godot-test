@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="naga"
-run/main_scene="uid://ekaet4v7vaxc"
+run/main_scene="uid://c81wuet8hf1k1"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
 
 [display]
 
@@ -23,6 +27,10 @@ window/size/viewport_height=1080
 [dotnet]
 
 project/assembly_name="naga"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/phantom_camera/plugin.cfg")
 
 [input]
 

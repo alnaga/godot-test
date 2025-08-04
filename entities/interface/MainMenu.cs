@@ -14,24 +14,9 @@ public partial class MainMenu : Control
         quitButton.Pressed += OnQuitButtonPressed;
     }
 
-    public override void _Input(InputEvent @event)
-    {
-        // If click on the screen, start game
-        // if (@event is InputEventMouseButton mouseEvent && mouseEvent.ButtonIndex == MouseButton.Left && mouseEvent.Pressed)
-        // {
-        //     StartGame();
-        // }
-
-        // if (@event is InputEventKey keyEvent && keyEvent.Keycode == Key.Escape)
-        // {
-        //     OnQuitButtonPressed();
-        // }
-    }
-
     private void StartGame()
     {
-        // Use utility method to change game state
-        GameManager.SetGameState(this, GameState.Game);
+        GetTree().ChangeSceneToFile("res://entities/levels/Level.tscn");
     }
 
     private void OnQuitButtonPressed()

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bq55x522abt7n"]
+
+[ext_resource type="Script" uid="uid://bll4es4ccwiky" path="res://entities/configuration/Settings.cs" id="1_id081"]
+
+[node name="Settings" type="Node" groups=["settings"]]
+script = ExtResource("1_id081")
