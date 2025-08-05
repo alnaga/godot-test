@@ -12,6 +12,7 @@ public partial class MainMenu : Control
 
         playButton.Pressed += OnStartButtonPressed;
         quitButton.Pressed += OnQuitButtonPressed;
+        OnStartButtonPressed();
     }
 
     private void StartGame()

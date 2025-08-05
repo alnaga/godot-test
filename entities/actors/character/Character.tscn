@@ -5,18 +5,18 @@
 [sub_resource type="CanvasTexture" id="CanvasTexture_nt58w"]
 specular_color = Color(1, 0, 0, 1)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4gjlp"]
-size = Vector2(50, 50)
+[sub_resource type="CircleShape2D" id="CircleShape2D_4gjlp"]
+radius = 33.0
 
 [node name="Character" type="CharacterBody2D"]
 script = ExtResource("1_nt58w")
 
 [node name="Body" type="Polygon2D" parent="."]
 scale = Vector2(0.999166, 1)
-color = Color(1, 0, 0, 1)
+color = Color(0.933333, 0.305882, 0, 1)
 texture = SubResource("CanvasTexture_nt58w")
-polygon = PackedVector2Array(-25, -25, 25, -25, 25, 25, -25, 25)
+polygon = PackedVector2Array(-33, -33, 33, -33, 33, 33, -33, 33)
 uv = PackedVector2Array(-25, -25, 25, -25, 25, 25, -25, 25)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_4gjlp")
+shape = SubResource("CircleShape2D_4gjlp")

@@ -1,10 +1,24 @@
-[gd_scene load_steps=2 format=3 uid="uid://b1oh5bp3hyayk"]
+[gd_scene load_steps=4 format=3 uid="uid://b1oh5bp3hyayk"]
 
 [ext_resource type="Script" uid="uid://c135c66eb70x" path="res://entities/objects/Collectible.cs" id="1_cg72n"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_sucs1"]
+specular_color = Color(1, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sucs1"]
+size = Vector2(66, 66)
 
 [node name="Collectible" type="Area2D"]
 script = ExtResource("1_cg72n")
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
+[node name="Body" type="Polygon2D" parent="."]
+position = Vector2(0.00688124, 0.25)
+scale = Vector2(0.1, 0.1)
+color = Color(0.933333, 0.854902, 0, 1)
+texture = SubResource("CanvasTexture_sucs1")
+polygon = PackedVector2Array(-33, -33, 33, -33, 33, 33, -33, 33)
+uv = PackedVector2Array(-25, -25, 25, -25, 25, 25, -25, 25)
 
-[node name="Collider" type="CollisionPolygon2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.1, 0.1)
+shape = SubResource("RectangleShape2D_sucs1")
