@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=4 uid="uid://5s1btdso6ii2"]
 
-[ext_resource type="Texture2D" uid="uid://dms3d7e4bw6g5" path="res://assets/farming n foraging - all.png" id="2_nhjtb"]
+[ext_resource type="Texture2D" uid="uid://dms3d7e4bw6g5" path="res://assets/hana caraka/farming n foraging - all.png" id="2_nhjtb"]
 [ext_resource type="PackedScene" uid="uid://b1oh5bp3hyayk" path="res://entities/objects/Collectible.tscn" id="3_jlhy6"]
-[ext_resource type="Texture2D" uid="uid://c12hadn0632xi" path="res://assets/Tileset/tiles.png" id="8_jaki3"]
+[ext_resource type="Texture2D" uid="uid://c12hadn0632xi" path="res://assets/hana caraka/Tileset/tiles.png" id="8_jaki3"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_hvwmv"]
 tile_data = PackedInt32Array(0, 0, 0, 65536, 0, 1, 131072, 0, 1, 196608, 0, 1, 262144, 0, 2, 1, 65536, 0, 65537, 65536, 1, 131073, 65536, 1, 196609, 65536, 1, 262145, 65536, 2, 2, 65536, 0, 65538, 65536, 1, 131074, 65536, 1, 196610, 65536, 1, 262146, 65536, 2, 3, 65536, 0, 65539, 65536, 1, 131075, 65536, 1, 196611, 65536, 1, 262147, 65536, 2, 4, 131072, 0, 65540, 131072, 1, 131076, 131072, 1, 196612, 131072, 1, 262148, 131072, 2)

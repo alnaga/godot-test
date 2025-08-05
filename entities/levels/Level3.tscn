@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://dspykf3qlwvpd"]
+
+[ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="4_l42m1"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_32m1q"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_l42m1"]
+sky_material = SubResource("ProceduralSkyMaterial_32m1q")
+
+[sub_resource type="Environment" id="Environment_b8m0h"]
+background_mode = 2
+sky = SubResource("Sky_l42m1")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_32m1q"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_32m1q"]
+
+[node name="Level3" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_b8m0h")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Node" type="Node" parent="."]
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="Node"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node/CharacterBody3D"]
+shape = SubResource("BoxShape3D_32m1q")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node/CharacterBody3D"]
+mesh = SubResource("BoxMesh_32m1q")
+
+[node name="Node3D" type="CSGCombiner3D" parent="."]
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.18134, 0)
+use_collision = true
+size = Vector3(15, 1, 7.5)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.015, -3.25)
+size = Vector3(15, 5, 1)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.015, 3.25)
+size = Vector3(15, 5, 1)
+
+[node name="ProtoController" parent="." instance=ExtResource("4_l42m1")]
+transform = Transform3D(-0.0206457, 0, -0.999787, 0, 1, 0, 0.999787, 0, -0.0206457, -2.57987, 1.68134, -0.165682)

@@ -56,7 +56,7 @@ public partial class Collectible : Area2D
     public void Collect(Player player)
     {
         Collected = true;
-        player.Score += Value;
+        player.Score += Value; 
         QueueFree();
     }
 }
