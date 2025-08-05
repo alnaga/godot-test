@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://dgtquxhucpsce"]
+[gd_scene load_steps=7 format=4 uid="uid://dmd020ygngiqx"]
 
 [ext_resource type="TileSet" uid="uid://t0j28061hvsr" path="res://entities/levels/Level2.tres" id="1_nooa8"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_yg515"]

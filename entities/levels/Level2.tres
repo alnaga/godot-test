@@ -1,10 +1,6 @@
-[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://t0j28061hvsr"]
-
-[ext_resource type="Texture2D" uid="uid://bq0tr5enrqbyl" path="res://assets/kenney_isometric-buildings-1/Spritesheet/buildingTiles_sheet.png" id="1_3lha0"]
-[ext_resource type="Texture2D" uid="uid://c8o6cmb7y7eg7" path="res://assets/kenney_isometric-blocks/Tilesheet/tilesheet_complete.png" id="2_6p4xb"]
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://t0j28061hvsr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eqx0m"]
-texture = ExtResource("1_3lha0")
 margins = Vector2i(1, 1)
 texture_region_size = Vector2i(64, 16)
 use_texture_padding = false
@@ -3608,7 +3604,6 @@ use_texture_padding = false
 41:35/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gd2oj"]
-texture = ExtResource("2_6p4xb")
 texture_region_size = Vector2i(111, 128)
 0:0/0 = 0
 0:0/0/texture_origin = Vector2i(0, -31)
